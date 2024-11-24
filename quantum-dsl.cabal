@@ -1,0 +1,36 @@
+cabal-version:      3.0
+name:               quantum-dsl
+version:            0.1.0.0
+synopsis:           A Domain-Specific Language for Quantum Computing Algorithms
+description:        A DSL designed to simplify quantum algorithm development and enable formal verification
+license:            MIT
+author:             Quantum DSL Team
+maintainer:         quantum-dsl-team@example.com
+category:           Language
+build-type:         Simple
+
+common shared-properties
+    default-language: Haskell2010
+    ghc-options: -Wall
+    build-depends:    base ^>=4.20.0.0
+                    , mtl ^>=2.3.1
+                    , containers ^>=0.7
+                    , text ^>=2.1
+
+library
+    import:           shared-properties
+    hs-source-dirs:   src
+    exposed-modules:  QuantumDSL.Core
+                    , QuantumDSL.Syntax
+                    , QuantumDSL.Types
+                    , QuantumDSL.Parser
+                    , QuantumDSL.Interpreter
+    build-depends:    parsec ^>=3.1.16.1
+
+test-suite quantum-dsl-test
+    import:           shared-properties
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:         Spec.hs
+    build-depends:    quantum-dsl
+                    , hspec ^>=2.11.7
